@@ -54,7 +54,7 @@ export function parseWeeklySummary(data) {
         average_sunshine: round(avgSunshine),
         min_temperature: minTemp,
         max_temperature: maxTemp,
-        summary: `${rainyDays} rainy days - ${rainyDays >= 4 ? 'rainy week': 'sunny week'}`
+        summary: `${rainyDays} deszczowe dni - ${rainyDays >= 4 ? 'deszczowy tydzień': 'słoneczny tydzień'}`
     };
 }
 
