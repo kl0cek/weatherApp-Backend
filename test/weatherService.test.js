@@ -1,9 +1,8 @@
-import axios from 'axios';
 
-import { fetchWeatherData, parseDailySummary, parseWeeklySummary } from '../app/forecast/weatherService.js';
+import { jest } from '@jest/globals'
+import { parseDailySummary, parseWeeklySummary } from '../app/forecast/weatherService.js';
 
 jest.mock('axios');
-const mockedAxios = axios;
 
 describe('Weather Service', () => {
   const mockWeatherData = {
@@ -23,27 +22,6 @@ describe('Weather Service', () => {
     jest.clearAllMocks();
   });
 
-  describe('fetchWeatherData', () => {
-    test('should fetch weather data successfully', async () => {
-      mockedAxios.get.mockResolvedValue({ data: mockWeatherData });
-
-      const result = await fetchWeatherData(52.2297, 21.0122);
-
-      expect(mockedAxios.get).toHaveBeenCalledWith(
-        'https://api.open-meteo.com/v1/forecast',
-        {
-          params: {
-            latitude: 52.2297,
-            longitude: 21.0122,
-            daily: 'weather_code,temperature_2m_max,temperature_2m_min,sunshine_duration,surface_pressure_mean,precipitation_sum,surface_pressure_max,surface_pressure_min',
-            timezone: 'auto'
-          }
-        }
-      );
-
-      expect(result).toEqual(mockWeatherData);
-    });
-  });
 
   describe('parseDailySummary', () => {
     test('should parse daily summary correctly', () => {

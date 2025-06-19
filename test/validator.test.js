@@ -1,3 +1,5 @@
+
+
 import { isValid } from '../app/forecast/utils/validators';
 
 describe('Validators', () => {
