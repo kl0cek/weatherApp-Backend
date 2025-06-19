@@ -3,7 +3,7 @@ import weatherRoutes from './forecast/routes/weatherRoutes.js';
 const app = express();
 
 app.use(express.json());
-app.get('/test', (req, res) => {
+app.get('/api/test', (req, res) => {
   res.send('API działa!');
 });
 

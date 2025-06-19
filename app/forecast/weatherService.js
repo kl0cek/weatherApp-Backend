@@ -1,6 +1,7 @@
 //surface_pressure_mean not working
 
 import axios from 'axios'
+import { formatDate } from './utils/validators.js';
 
 export async function fetchWeatherData(lat, lon) {
     const url = 'https://api.open-meteo.com/v1/forecast'
@@ -18,11 +19,11 @@ export async function fetchWeatherData(lat, lon) {
 
 export function parseDailySummary(data) {
     const days = data.daily.time.map((date, index) => ({
-        date,
+        date: formatDate(date),
         weathercode: data.daily.weather_code[index],
         temperature_min: data.daily.temperature_2m_min[index],
         temperature_max: data.daily.temperature_2m_max[index],
-        solar_energy: calcEnergyProduction(data.daily.sunshine_duration[index])
+        solar_energy: round(calcEnergyProduction(data.daily.sunshine_duration[index]))
     }));
 
     return { daily: days};
@@ -31,9 +32,10 @@ export function parseDailySummary(data) {
 export function parseWeeklySummary(data) {
     const days = data.daily;
     const count = days.time.length;
-    //TODO later we can put this into one function avgDailyPressure or smth
+
     const dailyAvgPressures = days.surface_pressure_max.map((maxPressure, index) => {
         const minPressure = days.surface_pressure_min[index];
+        
         const avgForDay = averagePressure(maxPressure, minPressure);
         return avgForDay;
     });
@@ -62,10 +64,13 @@ function average(arr) {
 }
 
 function averagePressure(max, min) {
+    
     if (max === undefined || min === undefined || max === null || min === null) {
+        
         return 0;
     }
     const result = (max + min) / 2;
+    
     return result;
 }
 
