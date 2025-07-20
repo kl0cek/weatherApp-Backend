@@ -78,7 +78,7 @@ describe('Weather Service', () => {
 
       expect(result.average_sunshine).toBeCloseTo(2.4, 1);
 
-      expect(result.summary).toBe('2 rainy days - sunny week');
+      expect(result.summary).toBe('2 deszczowe dni - słoneczny tydzień');
     });
 
     test('should classify as rainy week when 4+ rainy days', () => {
@@ -96,7 +96,7 @@ describe('Weather Service', () => {
       };
 
       const result = parseWeeklySummary(rainyWeekData);
-      expect(result.summary).toBe('4 rainy days - rainy week');
+      expect(result.summary).toBe('4 deszczowe dni - deszczowy tydzień');
     });
   });
 });

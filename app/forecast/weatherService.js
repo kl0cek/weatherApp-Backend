@@ -4,7 +4,7 @@ import axios from 'axios'
 import { formatDate } from './utils/validators.js';
 
 export async function fetchWeatherData(lat, lon) {
-    const url = 'https://api.open-meteo.com/v1/forecast'
+    const url = process.env.WEATHER_API_URL
 
     const params = {
         latitude: lat,
