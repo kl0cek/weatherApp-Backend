@@ -7,7 +7,7 @@
   "type": "module",
   "main": "./app/server.js",
   "scripts": {
-    "start": "node ./app/server.js",
+    "start": "node --env-file=.env ./app/server.js",
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "dependencies": {

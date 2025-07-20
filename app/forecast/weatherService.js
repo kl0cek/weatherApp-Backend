@@ -26,12 +26,17 @@ export function parseDailySummary(data) {
         solar_energy: round(calcEnergyProduction(data.daily.sunshine_duration[index]))
     }));
 
+    const allValid = days.every(isValidDailyForecast);
+    if (!allValid) {
+        throw new Error('Invalid daily forecast structure');
+    }
+
     return { daily: days};
 }
 
 export function parseWeeklySummary(data) {
     const days = data.daily;
-    const count = days.time.length;
+    //const count = days.time.length;
 
     const dailyAvgPressures = days.surface_pressure_max.map((maxPressure, index) => {
         const minPressure = days.surface_pressure_min[index];
@@ -48,14 +53,21 @@ export function parseWeeklySummary(data) {
 
     const rainyDays = days.precipitation_sum.filter(val => val >0).length;
 
+    
 
-    return {
+    const result = {
         average_pressure: round(avgPressure),
         average_sunshine: round(avgSunshine),
         min_temperature: minTemp,
         max_temperature: maxTemp,
         summary: `${rainyDays} deszczowe dni - ${rainyDays >= 4 ? 'deszczowy tydzień': 'słoneczny tydzień'}`
     };
+
+    if (!isValidWeeklyForecast(result)) {
+        throw new Error('Invalid weekly forecast structure');
+    }
+
+    return result;
 }
 
 function average(arr) {
