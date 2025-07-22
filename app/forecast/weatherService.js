@@ -1,7 +1,7 @@
 //surface_pressure_mean not working
 
 import axios from 'axios'
-import { formatDate } from './utils/validators.js';
+import { formatDate, isValidDailyForecast, isValidWeeklyForecast } from './utils/validators.js';
 
 export async function fetchWeatherData(lat, lon) {
     const url = process.env.WEATHER_API_URL

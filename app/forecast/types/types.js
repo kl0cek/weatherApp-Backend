@@ -1,25 +1,18 @@
-const DailyForecast = {
-    date: String,
-    weatherCode: Number,
-    temperature_min: Number,
-    temperature_max: Number,
-    solar_energy: Number
+export const DailyForecast = {
+  date: string,
+  weatherCode: number,
+  tempMax: number,
+  tempMin: number,
+  solarEnergy: number
 };
 
 
-const WeeklyForecast = {
-    average_pressure: Number,
-    average_sunshine: Number,
-    min_temperature: Number,
-    max_temperature: Number,
-    summary: String
-};
-
-
-
-module.exports = {
-    DailyForecast,
-    WeeklyForecast
+export const WeeklyForecast = {
+  tempMin: number,
+  tempMax: number,
+  avgPressure: number,
+  avgSunExposure: number,
+  comment: string
 };
 
 
